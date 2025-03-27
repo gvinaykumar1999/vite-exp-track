@@ -1,9 +1,10 @@
 import React from "react";
+import Homepage from "./homepage";
 
 const App = () => {
   return (
     <div>
-      <h2>Expense Tracker</h2>
+      <Homepage />
     </div>
   );
 };
