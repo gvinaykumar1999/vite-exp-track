@@ -1,6 +1,24 @@
 import React from "react";
+import { useState } from "react";
 
-const homepage = () => {
+const Homepage = () => {
+  const [input, setInput] = useState({
+    activity: "",
+    amount: "",
+  });
+
+  const changeHandle = (e) => {
+    const { name, value } = e.target;
+
+    setInput((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
+
+  const handleSubmit = () => {
+    console.log(input);
+  };
+
   return (
     <div className=" mt-40 m-auto border-2 w-[50%]">
       <h2 className=" text-center pt-6 pb-6 text-3xl font-bold text-red-700 underline">
@@ -23,20 +41,26 @@ const homepage = () => {
 
       <div className=" border-2 mx-8 my-6 rounded-lg px-5 py-5  ">
         <input
-          type="search"
+          type="text"
+          name="activity"
+          id="inputActivity"
+          onChange={changeHandle}
           className="block w-full p-4 my-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
           placeholder="Activity"
           required
         />
         <input
-          type="search"
+          type="text"
+          name="amount"
+          id="inputAmount"
+          onChange={changeHandle}
           className="block w-full p-4 ps-10 my-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
           placeholder="Amount"
           required
         />
         <br></br>
 
-        <div class="flex items-center mb-4 mx-6 ">
+        <div className="flex items-center mb-4 mx-6 ">
           <input
             type="radio"
             value=""
@@ -57,6 +81,7 @@ const homepage = () => {
           </label>
           <button
             type="button"
+            onClick={handleSubmit}
             className=" focus:outline-none justify-between text-white float-right bg-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-15"
           >
             Submit
@@ -66,12 +91,10 @@ const homepage = () => {
 
       <div className="w-[100%] justify-between inline-flex mb-10 ">
         <div className="w-[35%] pl-6 ml-8 text-balance border-2 rounded-b-md">
-          {" "}
           <p className="font-bold mb-1.5"> Expense :</p>
           <p className="text-3xl text-center text-red-600">$50000</p>
         </div>
         <div className="w-[35%] pl-6 mr-8 text-balance border-2 rounded-b-md">
-          {" "}
           <p className="font-bold mb-1.5">Income :</p>
           <p className="text-3xl text-center text-green-600">$ 70000</p>
         </div>
@@ -79,7 +102,7 @@ const homepage = () => {
       <div>
         <h2 className="text-2xl font-bold ml-8">Transactions</h2>
       </div>
-      <div class="mb-6">
+      <div className="mb-6">
         <input
           type="search"
           placeholder="Search Here"
@@ -87,68 +110,66 @@ const homepage = () => {
         />
       </div>
 
-      <div class="relative overflow-x-auto shadow-md mb-10 sm:rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+      <div className="relative overflow-x-auto shadow-md mb-10 sm:rounded-lg">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 Activity
               </th>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 Amount
               </th>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 Action
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+            <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
               <th
                 scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                FreeLancing
-              </th>
-              <td class="px-6 py-4">$ 15000</td>
-              <td class="px-6 py-4">
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              ></th>
+              <td className="px-6 py-4">$ 15000</td>
+              <td className="px-6 py-4">
                 <button
                   type="button"
-                  class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700"
+                  className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700"
                 >
                   Remove
                 </button>
               </td>
             </tr>
-            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+            <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
               <th
                 scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
                 Microsoft Surface Pro
               </th>
-              <td class="px-6 py-4">$1999</td>
-              <td class="px-6 py-4">
+              <td className="px-6 py-4">$1999</td>
+              <td className="px-6 py-4">
                 <button
                   type="button"
-                  class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700"
+                  className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700"
                 >
                   Remove
                 </button>
               </td>
             </tr>
-            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+            <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
               <th
                 scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
                 Microsoft Surface Pro
               </th>
-              <td class="px-6 py-4">$9500</td>
-              <td class="px-6 py-4">
+              <td className="px-6 py-4">$9500</td>
+              <td className="px-6 py-4">
                 <button
                   type="button"
-                  class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700"
+                  className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700"
                 >
                   Remove
                 </button>
@@ -161,4 +182,4 @@ const homepage = () => {
   );
 };
 
-export default homepage;
+export default Homepage;
