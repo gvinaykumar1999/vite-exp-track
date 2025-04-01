@@ -9,10 +9,17 @@ const Chatgpt = () => {
     moneySpend: "",
   });
 
+  const [submittedData, setSubmittedData] = useState([]);
+
   //handle for form submition
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Add the current form data to the submittedData array
+
+    setSubmittedData([...submittedData, { ...formData }]);
+
     // Do something with the form data (e.g., send to an API)
     console.log("form submitted with data ", formData);
 
@@ -32,6 +39,18 @@ const Chatgpt = () => {
     // Dynamically update the correct field based on its name
     setFormData({ ...formData, [name]: value });
   };
+
+  // Remove an entry based on its index
+  const handleRemove = (index) => {
+    const newData = submittedData.filter((_, i) => i !== index);
+    setSubmittedData(newData);
+  };
+
+  // total all the income and expences
+
+  const totalIncome = submittedData
+    .filter((data) => data.moneySpend === "Income")
+    .reduce((total, data) => total + parseFloat(data.amount || 0), 0);
 
   return (
     <div className=" mt-1 m-auto border-2 w-[50%]">
@@ -142,24 +161,30 @@ const Chatgpt = () => {
               </th>
             </tr>
           </thead>
-          <tbody>
-            <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              ></th>
-              <td className="px-6 py-4">$ </td>
-              <td className="px-6 py-4"></td>
-              <td className="px-6 py-4">
-                <button
-                  type="button"
-                  className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700"
+          {submittedData.length > 0 && (
+            <tbody>
+              {submittedData.map((data, index) => (
+                <tr
+                  key={index}
+                  className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200"
                 >
-                  Remove
-                </button>
-              </td>
-            </tr>
-          </tbody>
+                  <td className="px-6 py-4">{data.activity} </td>
+                  <td className="px-6 py-4">{"$ " + data.amount}</td>
+                  <td className="px-6 py-4">{data.moneySpend}</td>
+                  <td className="px-6 py-4">
+                    <button
+                      onClick={() => {
+                        handleRemove(index);
+                      }}
+                      className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700"
+                    >
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          )}
         </table>
       </div>
     </div>
