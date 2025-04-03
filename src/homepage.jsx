@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const Chatgpt = () => {
+const Homepage = () => {
   // Define state for multiple input fields
   const [formData, setFormData] = useState({
     activity: "",
@@ -10,6 +10,7 @@ const Chatgpt = () => {
   });
 
   const [submittedData, setSubmittedData] = useState([]);
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   //handle for form submition
 
@@ -30,6 +31,7 @@ const Chatgpt = () => {
       amount: "",
       moneySpend: "",
     });
+    setIsFormVisible(false);
   };
 
   // Handle input changes for multiple fields
@@ -46,6 +48,16 @@ const Chatgpt = () => {
     setSubmittedData(newData);
   };
 
+  // total all the income and expences
+
+  const totalIncome = submittedData
+    .filter((data) => data.moneySpend === "Income")
+    .reduce((total, data) => total + parseFloat(data.amount || 0), 0);
+
+  const totalExpense = submittedData
+    .filter((data) => data.moneySpend === "Expense")
+    .reduce((total, data) => total + parseFloat(data.amount || 0), 0);
+
   return (
     <div className=" mt-1 m-auto border-2 w-[50%]">
       <h2 className=" text-center pt-6 pb-6 text-3xl font-bold text-red-700 underline">
@@ -55,75 +67,90 @@ const Chatgpt = () => {
       <div className="inline-flex w-[100%] mb-8">
         <div className="inline-flex ml-8 w-[82%]">
           <p className="font-bold">Balance :</p>
-          <p className="text-3xl pl-6 -m-2 text-green-600"> $20000</p>
+          <p
+            className={`text-3xl pl-6 -m-2 ${
+              totalIncome - totalExpense >= 0
+                ? "text-green-700"
+                : "text-red-700"
+            }`}
+          >
+            ${totalIncome - totalExpense}
+          </p>
         </div>
         <button
           type="button"
-          className=" focus:outline-none justify-between text-white float-right bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-1.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 mr-5"
+          onClick={() => setIsFormVisible(!isFormVisible)}
+          className=" focus:outline-none justify-between text-white float-right bg-green-600 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-1.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 mr-5"
         >
-          ADD
+          {isFormVisible ? "Cancel" : " Add"}
         </button>
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className=" border-2 mx-8 my-6 rounded-lg px-5 py-5  ">
-          <input
-            type="text"
-            name="activity"
-            value={formData.activity}
-            onChange={handleChange}
-            className="block w-full p-4 my-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
-            placeholder="Activity"
-          />
-          <input
-            type="phone"
-            name="amount"
-            value={formData.amount}
-            onChange={handleChange}
-            className="block w-full p-4 ps-10 my-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
-            placeholder="Amount"
-          />
-          <br></br>
-          <div className="flex items-center mb-4 mx-6 ">
+      {isFormVisible && (
+        <form onSubmit={handleSubmit}>
+          <div className=" border-2 mx-8 my-6 rounded-lg px-5 py-5  ">
             <input
-              type="radio"
-              value="Expense"
-              name="moneySpend"
+              type="text"
+              name="activity"
+              value={formData.activity}
               onChange={handleChange}
-              checked={formData.moneySpend === "Expense"}
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
+              className="block w-full p-4 my-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+              placeholder="Activity"
             />
-            <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-              Expense
-            </label>
             <input
-              type="radio"
-              value="Income"
-              name="moneySpend"
+              type="phone"
+              name="amount"
+              value={formData.amount}
               onChange={handleChange}
-              checked={formData.moneySpend === "Income"}
-              className="w-4 h-4 ml-10 text-blue-600 bg-gray-100 border-gray-300"
+              className="block w-full p-4 ps-10 my-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+              placeholder="Amount"
             />
-            <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-              Income
-            </label>
-            <button
-              type="submit"
-              className=" focus:outline-none justify-between text-white float-right bg-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-15"
-            >
-              Submit
-            </button>
+            <br></br>
+            <div className="flex items-center mb-4 mx-6 ">
+              <input
+                type="radio"
+                value="Expense"
+                name="moneySpend"
+                onChange={handleChange}
+                checked={formData.moneySpend === "Expense"}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
+              />
+              <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                Expense
+              </label>
+              <input
+                type="radio"
+                value="Income"
+                name="moneySpend"
+                onChange={handleChange}
+                checked={formData.moneySpend === "Income"}
+                className="w-4 h-4 ml-10 text-blue-600 bg-gray-100 border-gray-300"
+              />
+              <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                Income
+              </label>
+              <button
+                type="submit"
+                className=" focus:outline-none justify-between text-white float-right bg-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-15"
+              >
+                Submit
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      )}
 
       <div className="w-[100%] justify-between inline-flex mb-10 ">
         <div className="w-[35%] pl-6 ml-8 text-balance border-2 rounded-b-md">
           <p className="font-bold mb-1.5"> Expense :</p>
-          <p className="text-3xl text-center text-red-600">$50000</p>
+          <p className="text-3xl text-center text-red-600">
+            ${totalExpense.toFixed(2)}
+          </p>
         </div>
         <div className="w-[35%] pl-6 mr-8 text-balance border-2 rounded-b-md">
           <p className="font-bold mb-1.5">Income :</p>
-          <p className="text-3xl text-center text-green-600">$ 70000</p>
+          <p className="text-3xl text-center text-green-600">
+            ${totalIncome.toFixed(2)}
+          </p>
         </div>
       </div>
       <div>
@@ -185,4 +212,4 @@ const Chatgpt = () => {
   );
 };
 
-export default Chatgpt;
+export default Homepage;

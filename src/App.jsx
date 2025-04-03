@@ -1,12 +1,12 @@
 import React from "react";
-import Homepage from "./homepage";
 import Chatgpt from "./chatgpt";
+import Homepage from "./homepage";
 
 const App = () => {
   return (
     <div>
-      {/* <Homepage /> */}
-      <Chatgpt />
+      <Homepage />
+      {/* <Chatgpt /> */}
     </div>
   );
 };
