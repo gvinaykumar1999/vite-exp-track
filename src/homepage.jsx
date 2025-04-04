@@ -12,6 +12,10 @@ const Homepage = () => {
   const [submittedData, setSubmittedData] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
 
+  // State for the search term
+
+  const [searchTerm, setSearchTerm] = useState("");
+
   //handle for form submition
 
   const handleSubmit = (e) => {
@@ -57,6 +61,13 @@ const Homepage = () => {
   const totalExpense = submittedData
     .filter((data) => data.moneySpend === "Expense")
     .reduce((total, data) => total + parseFloat(data.amount || 0), 0);
+
+  const filteredData = submittedData.filter(
+    (data) =>
+      data.activity.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      data.amount.toString().includes(searchTerm) ||
+      data.moneySpend.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className=" mt-1 m-auto border-2 w-[50%]">
@@ -159,6 +170,8 @@ const Homepage = () => {
       <div className="mb-6">
         <input
           type="search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)} //update search term on change
           placeholder="Search Here"
           className="bg-gray-100 mx-8 my-8 border border-gray-300 text-sm rounded-lg block w-[90%] p-3 "
         />
@@ -182,9 +195,9 @@ const Homepage = () => {
               </th>
             </tr>
           </thead>
-          {submittedData.length > 0 && (
+          {filteredData.length > 0 && (
             <tbody>
-              {submittedData.map((data, index) => (
+              {filteredData.map((data, index) => (
                 <tr
                   key={index}
                   className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200"
