@@ -1,10 +1,12 @@
 import React from "react";
 import Homepage from "./homepage";
+import LoginForm from "./LoginForm";
 
 const App = () => {
   return (
     <div>
-      <Homepage />
+      {/* <Homepage /> */}
+      <LoginForm />
     </div>
   );
 };
