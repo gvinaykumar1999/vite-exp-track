@@ -1,30 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-const LoginForm = () => {
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [submittedData, setSubmittedData] = useState([]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setLoginData({ ...loginData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    setSubmittedData([...submittedData], { ...loginData });
-    //console
-    console.log(loginData);
-    //reset input values
-    setLoginData({
-      email: "",
-      password: "",
-    });
-  };
+const Page = () => {
   return (
     <div className="flex items-center justify-center h-screen p-4 sm:p-0">
       <div className="flex flex-col sm:flex-row box-border rounded-2xl w-full sm:w-[60%] bg-gray-50">
@@ -36,7 +12,7 @@ const LoginForm = () => {
           <p className="text-center text-xs sm:text-sm text-gray-400">
             Welcome back! Please enter your details
           </p>
-          <form onSubmit={handleSubmit} className="mt-8">
+          <form className="mt-8">
             <label
               htmlFor="email"
               className="block text-sm font-medium text-gray-700"
@@ -46,8 +22,6 @@ const LoginForm = () => {
             <input
               type="email"
               name="email"
-              onChange={handleChange}
-              value={loginData.email}
               className="block w-full p-3 my-1 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
               placeholder="Email"
             />
@@ -61,8 +35,6 @@ const LoginForm = () => {
             <input
               type="password"
               name="password"
-              onChange={handleChange}
-              value={loginData.password}
               className="block w-full p-3 my-1 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
               placeholder="Password"
             />
@@ -107,16 +79,10 @@ const LoginForm = () => {
         </div>
 
         {/* Right Side */}
-        <div className="w-0 sm:w-1/2 bg-purple-400 hidden sm:block">
-          <img
-            src="public/moneylogin.jpg"
-            alt="Login Img"
-            className="w-full h-full"
-          />
-        </div>
+        <div className="w-0 sm:w-1/2 bg-purple-400 hidden sm:block"></div>
       </div>
     </div>
   );
 };
 
-export default LoginForm;
+export default Page;
