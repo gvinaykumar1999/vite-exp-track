@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
   const [signupData, setSignupData] = useState({
@@ -15,6 +16,8 @@ const SignupPage = () => {
   const [submittedData, setSubmittedData] = useState([]);
   //const [passwordError, setPasswordError] = useState("");
   const [formErrors, setFormErrors] = useState({});
+
+  const navigate = useNavigate();
 
   const handleChanges = (e) => {
     const { name, value } = e.target;
@@ -74,13 +77,20 @@ const SignupPage = () => {
   return (
     <div className="flex items-center justify-center h-screen p-4 sm:p-0">
       <div className="flex flex-col sm:flex-row box-border rounded-2xl w-full sm:w-[60%] bg-gray-50">
-        <div className="w-full  p-4 sm:p-8">
-          <h2 className="text-center text-2xl sm:text-3xl mt-12 mb-3 font-bold">
+        <div className="w-full relative p-4 sm:p-8">
+          <button
+            onClick={() => navigate("/")}
+            className="absolute top-5 right-5 w-6 h-6 flex items-center justify-center hover:bg-gray-300 text-gray-700 text-xl rounded-full shadow-md"
+          >
+            &times;
+          </button>
+          <h2 className="text-center text-2xl  sm:text-3xl mt-12 mb-3 font-bold">
             Sign Up
           </h2>
           <p className="text-center text-xs sm:text-sm text-gray-400">
             Please enter your details
           </p>
+
           <form onSubmit={handleSubmit} className="mt-8 w-full ">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
@@ -93,12 +103,12 @@ const SignupPage = () => {
                 <input
                   type="text"
                   name="fname"
+                  placeholder="First Name"
                   value={signupData.fname}
                   onChange={handleChanges}
                   className={`block w-full rounded-lg bg-gray-50 p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border ${
                     formErrors.fname ? "border-red-500" : "border-gray-300"
                   } `}
-                  placeholder="First Name"
                 />
                 {formErrors.fname && (
                   <p className="text-red-500 text-sm mt-1">
@@ -116,11 +126,18 @@ const SignupPage = () => {
                 <input
                   type="text"
                   name="lname"
+                  placeholder="Last Name"
                   value={signupData.lname}
                   onChange={handleChanges}
-                  className="block w-full p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
-                  placeholder="Last Name"
+                  className={`block w-full rounded-lg bg-gray-50 p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border ${
+                    formErrors.lname ? "border-red-500" : "border-gray-300"
+                  } `}
                 />
+                {formErrors.lname && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {formErrors.lname}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -138,9 +155,16 @@ const SignupPage = () => {
                   name="email"
                   value={signupData.email}
                   onChange={handleChanges}
-                  className="block w-full p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                   placeholder="Email Id"
+                  className={`block w-full rounded-lg bg-gray-50 p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border ${
+                    formErrors.email ? "border-red-500" : "border-gray-300"
+                  } `}
                 />
+                {formErrors.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {formErrors.email}
+                  </p>
+                )}
               </div>
               <div>
                 <label
@@ -154,9 +178,16 @@ const SignupPage = () => {
                   name="phone"
                   value={signupData.phone}
                   onChange={handleChanges}
-                  className="block w-full p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                   placeholder="Phone Number"
+                  className={`block w-full rounded-lg bg-gray-50 p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border ${
+                    formErrors.phone ? "border-red-500" : "border-gray-300"
+                  } `}
                 />
+                {formErrors.phone && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {formErrors.phone}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -175,9 +206,16 @@ const SignupPage = () => {
                   name="company"
                   value={signupData.company}
                   onChange={handleChanges}
-                  className="block w-full p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                   placeholder="Company name"
+                  className={`block w-full rounded-lg bg-gray-50 p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border ${
+                    formErrors.company ? "border-red-500" : "border-gray-300"
+                  } `}
                 />
+                {formErrors.company && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {formErrors.company}
+                  </p>
+                )}
               </div>
               <div>
                 <label
@@ -191,9 +229,16 @@ const SignupPage = () => {
                   name="location"
                   value={signupData.location}
                   onChange={handleChanges}
-                  className="block w-full p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                   placeholder="Location"
+                  className={`block w-full rounded-lg bg-gray-50 p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border ${
+                    formErrors.location ? "border-red-500" : "border-gray-300"
+                  } `}
                 />
+                {formErrors.location && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {formErrors.location}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -211,9 +256,16 @@ const SignupPage = () => {
                   name="password"
                   value={signupData.password}
                   onChange={handleChanges}
-                  className="block w-full p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                   placeholder="Password"
+                  className={`block w-full rounded-lg bg-gray-50 p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border ${
+                    formErrors.password ? "border-red-500" : "border-gray-300"
+                  } `}
                 />
+                {formErrors.password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {formErrors.password}
+                  </p>
+                )}
               </div>
               <div>
                 <label
@@ -227,9 +279,19 @@ const SignupPage = () => {
                   name="confirmpassword"
                   value={signupData.confirmpassword}
                   onChange={handleChanges}
-                  className="block w-full p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                   placeholder="Confirm Password"
+                  className={`block w-full rounded-lg bg-gray-50 p-3 my-1 ps-5 sm:ps-8 text-sm text-gray-900 border ${
+                    formErrors.confirmpassword
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  } `}
                 />
+                {formErrors.confirmpassword && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {formErrors.confirmpassword}
+                  </p>
+                )}
+
                 {/* {passwordError && (
                   <p className="text-red-500 text-sm mt-1">{passwordError}</p>
                 )} */}
@@ -238,7 +300,7 @@ const SignupPage = () => {
             <br />
 
             <a
-              href="#"
+              href="/login"
               className="text-purple-600 text-sm text-center mt-2 hover:underline"
             >
               Already have an account ?

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const Homepage = () => {
+const Accounts = () => {
   // Define state for multiple input fields
   const [formData, setFormData] = useState({
     activity: "",
@@ -225,4 +225,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default Accounts;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [loginData, setLoginData] = useState({
@@ -7,6 +8,7 @@ const LoginForm = () => {
   });
 
   const [submittedData, setSubmittedData] = useState([]);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,6 +27,7 @@ const LoginForm = () => {
       password: "",
     });
   };
+
   return (
     <div className="flex items-center justify-center h-screen p-4 sm:p-0">
       <div className="flex flex-col sm:flex-row box-border rounded-2xl w-full sm:w-[60%] bg-gray-50">
@@ -100,18 +103,25 @@ const LoginForm = () => {
           </form>
           <p className="text-center text-xs mt-12 mb-8 text-gray-400">
             Don't have an account?
-            <a href="#" className="text-purple-600 hover:underline">
+            <a href="/signup" className="text-purple-600 hover:underline">
               Sign up
             </a>
           </p>
         </div>
 
         {/* Right Side */}
-        <div className="w-0 sm:w-1/2 bg-purple-400 hidden sm:block">
+        <div className="w-0 sm:w-1/2 relative hidden sm:block">
+          <button
+            onClick={() => navigate("/")}
+            className="absolute top-5 right-5 w-6 h-6 flex items-center justify-center hover:bg-gray-300 text-gray-700 text-xl rounded-full shadow-md"
+          >
+            &times;
+          </button>
+
           <img
             src="public/moneylogin.jpg"
             alt="Login Img"
-            className="w-full h-full"
+            className="w-full h-full  "
           />
         </div>
       </div>
