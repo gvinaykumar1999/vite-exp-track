@@ -75,12 +75,12 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen p-4 sm:p-0">
+    <div className="flex items-center justify-center h-screen p-4 sm:m-0  sm:p-0 mt-20 bg-purple-300">
       <div className="flex flex-col sm:flex-row box-border rounded-2xl w-full sm:w-[60%] bg-gray-50">
         <div className="w-full relative p-4 sm:p-8">
           <button
             onClick={() => navigate("/")}
-            className="absolute top-5 right-5 w-6 h-6 flex items-center justify-center hover:bg-gray-300 text-gray-700 text-xl rounded-full shadow-md"
+            className="absolute top-5 mt-10 sm:mt-2 sm:mr-2 right-5 w-6 h-6 flex items-center justify-center hover:bg-gray-300 text-gray-700 text-xl rounded-full shadow-md"
           >
             &times;
           </button>
