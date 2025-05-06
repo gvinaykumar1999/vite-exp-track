@@ -3,8 +3,8 @@ import React from "react";
 const Home = () => {
   return (
     <div>
-      <div className="bg-gray-400">
-        <h1 className="text-3xl text-center pt-5  ">Home Page</h1>
+      <div className="bg-gray-400 mt-0">
+        <h1 className="text-3xl text-center pt-5 pb-10 ">Home Page</h1>
         <div className="flex space-x-6 p-5">
           <div>
             <h1 className="text-2xl">Welcome!</h1>

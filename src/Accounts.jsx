@@ -13,23 +13,38 @@ const Accounts = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   // State for the search term
-
   const [searchTerm, setSearchTerm] = useState("");
 
   //handle for form submition
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Add the current form data to the submittedData array
+    const { activity, amount, moneySpend } = formData;
 
+    // basic empty field check
+    if (!activity || !amount || !moneySpend) {
+      alert("please fill in all fields ");
+      return;
+    }
+
+    const numericAmount = parseFloat(amount);
+    // check if new expense exceeds available incomes
+
+    if (
+      moneySpend === "Expense" &&
+      numericAmount > totalIncome - totalExpense
+    ) {
+      alert("Expenses can't be more than availabe balance .");
+      return;
+    }
+
+    // Add the current form data to the submittedData array
     setSubmittedData([...submittedData, { ...formData }]);
 
     // Do something with the form data (e.g., send to an API)
     console.log("form submitted with data ", formData);
 
     // reset input fields after submition
-
     setFormData({
       activity: "",
       amount: "",

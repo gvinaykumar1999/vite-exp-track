@@ -21,6 +21,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     const errors = {};
+
     // required fields validation
     Object.entries(loginData).forEach(([key, value]) => {
       if (!value.trim()) {
@@ -31,7 +32,9 @@ const LoginForm = () => {
     setFormErrors(errors);
 
     // Stop submission if there are errors
-    if (Object.keys(errors).length > 0) return;
+    if (Object.keys(errors).length === 0) {
+      navigate("/accounts");
+    }
 
     setSubmittedData([...submittedData], { ...loginData });
     //console
@@ -107,9 +110,11 @@ const LoginForm = () => {
             >
               Forgot password?
             </a>
+
             <button className="inline-block w-full mt-8 px-6 py-3 bg-purple-600 text-white font-medium text-sm rounded-md shadow-sm hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
               Log in
             </button>
+
             <div className="flex items-center justify-center my-5 gap-4">
               <hr className="flex-grow border-t border-gray-300" />
               <span className="text-gray-400 text-xs">Or Continue with</span>

@@ -14,7 +14,7 @@ const App = () => {
   return (
     <div>
       <LandingNav />
-      <div style={{ paddingTop: "70px" }}>
+      <div style={{ paddingTop: "65px" }}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/signup" element={<SignupPage />} />
@@ -24,6 +24,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/accounts" element={<Accounts />} />
         </Routes>
       </div>
     </div>
