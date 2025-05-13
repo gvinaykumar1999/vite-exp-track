@@ -9,17 +9,19 @@ import About from "./About";
 import Contact from "./Contact";
 import Services from "./Services";
 import LandingPage from "./LandingPage";
+import Profile from "./Profile";
 
 const App = () => {
   return (
     <div>
       <LandingNav />
-      <div style={{ paddingTop: "65px" }}>
+      <div style={{ paddingTop: "60px" }}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
