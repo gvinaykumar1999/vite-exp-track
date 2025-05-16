@@ -75,8 +75,8 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen p-4 sm:m-0  sm:p-0 mt-20 bg-purple-300">
-      <div className="flex flex-col sm:flex-row box-border rounded-2xl w-full sm:w-[60%] bg-gray-50">
+    <div className="flex items-center justify-center h-screen p-4 sm:m-0  sm:p-0 mt-20 bg-[url('./signuppage.jpg')] bg-cover bg-center">
+      <div className="flex flex-col sm:flex-row box-border -mt-10 rounded-2xl w-full sm:w-[50%] bg-gray-50">
         <div className="w-full relative p-4 sm:p-8">
           <button
             onClick={() => navigate("/")}
