@@ -1,6 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
+import { IoMdLogOut } from "react-icons/io";
+import { RiAccountCircleLine } from "react-icons/ri";
+import { LuSquareMenu } from "react-icons/lu";
+import { LiaAddressBook } from "react-icons/lia";
+import { IoLogoUsd } from "react-icons/io";
+import { FaEuroSign } from "react-icons/fa";
+import { FaYenSign } from "react-icons/fa";
+import { RiMoneyRupeeCircleFill } from "react-icons/ri";
 
 const LandingNav = () => {
   const navigate = useNavigate();
@@ -10,6 +18,18 @@ const LandingNav = () => {
     localStorage.getItem("isLoggedIn") === "true"
   );
   const [isHovered, setIsHovered] = useState(false);
+  const timeoutRef = useRef(null);
+
+  const handleMouseEnter = () => {
+    clearTimeout(timeoutRef.current); //cancel any pending hide
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsHovered(false);
+    }, 2000); //2 seconds
+  };
 
   useEffect(() => {
     //check if we navigated to /accounts -> user logged in
@@ -31,6 +51,8 @@ const LandingNav = () => {
       navigate("/login");
     }
   };
+
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
@@ -55,25 +77,34 @@ const LandingNav = () => {
               <div className="flex items-end justify-end ml-auto">
                 <div
                   className="relative "
-                  onMouseEnter={() => setIsHovered(true)}
-                  onMouseLeave={() => setIsHovered(false)}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
                 >
-                  {/* Image */}
-                  <img
-                    src="/profile-user.png"
-                    title="user icons"
-                    alt="icon "
-                    className="w-8 h-8 rounded-full cursor-pointer "
-                  />
+                  <RiAccountCircleLine className="text-3xl" />
+
                   {/* popup box  */}
                   {isHovered && (
                     <div className="absolute left-1/2 transform -translate-x-1/2 mb-3 mt-3 max-w-xs bg-white text-gray-800 px-5 py-3 rounded shadow-lg z-10 transition-opacity duration-300 ease-in-out animate-fade-in">
                       <ul className="cursor-pointer">
                         <Link to="/profile">
-                          <li>Profile</li>
+                          <li className="flex items-center gap-2">
+                            <LiaAddressBook className="text-lg" />
+                            Profile
+                          </li>
                         </Link>
                         <hr />
-                        <li onClick={handleAuthClick}>Logout</li>
+                        <li className="flex items-center gap-2">
+                          <LuSquareMenu className="text-lg" />
+                          Menu
+                        </li>
+                        <hr />
+                        <li
+                          onClick={handleAuthClick}
+                          className="flex items-center gap-2"
+                        >
+                          <IoMdLogOut className="text-lg" />
+                          Logout
+                        </li>
                       </ul>
                     </div>
                   )}
@@ -133,41 +164,108 @@ const LandingNav = () => {
             className="items-center justify-between hidden md:flex md:w-[400px] md:order-1"
             id="navbar-sticky"
           >
-            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg bg-gray-300 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-              <li>
-                <Link
-                  to="/home"
-                  className="block py-2 px-3 text-gray-900  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                  aria-current="page"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/about"
-                  className="block py-2 px-3 text-gray-900  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/services"
-                  className="block py-2 px-3 text-gray-900  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/contact"
-                  className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
+            {isLoggedIn ? (
+              <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg bg-gray-300 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li className="relative">
+                  <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="block py-2 px-3 text-gray-900  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    aria-current="page"
+                  >
+                    Currency ▼
+                  </button>
+
+                  {isOpen && (
+                    <ul className="absolute left-0 mt-2 w-22 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-md ">
+                      <li>
+                        <button className="flex items-center gap-1 px-[8px] py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
+                          <RiMoneyRupeeCircleFill />
+                          RUPEE
+                        </button>
+                      </li>
+                      <li>
+                        <button className="flex items-center gap-1 px-[15px] py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
+                          <IoLogoUsd />
+                          USD
+                        </button>
+                      </li>
+                      <li>
+                        <button className="flex items-center gap-1 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
+                          <FaEuroSign />
+                          EUR
+                        </button>
+                      </li>
+                      <li>
+                        <button className="flex items-center gap-1 px-[15px] py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
+                          <FaYenSign />
+                          GBP
+                        </button>
+                      </li>
+                    </ul>
+                  )}
+                </li>
+                <li>
+                  <Link
+                    // to="/income"
+                    className="block py-2 px-3 text-gray-900  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Incomes
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    //to="/expense"
+                    className="block py-2 px-3 text-gray-900  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Expense
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    //to="/balance"
+                    className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Balance
+                  </Link>
+                </li>
+              </ul>
+            ) : (
+              <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg bg-gray-300 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                  <Link
+                    to="/home"
+                    className="block py-2 px-3 text-gray-900  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    aria-current="page"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/about"
+                    className="block py-2 px-3 text-gray-900  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/services"
+                    className="block py-2 px-3 text-gray-900  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Services
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/contact"
+                    className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </nav>

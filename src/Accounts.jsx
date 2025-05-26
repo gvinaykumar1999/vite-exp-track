@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { RiMoneyRupeeCircleFill } from "react-icons/ri";
 
 const Accounts = () => {
   // Define state for multiple input fields
@@ -92,15 +93,16 @@ const Accounts = () => {
       <br></br>
       <div className="inline-flex w-[100%] mb-8">
         <div className="inline-flex ml-8 w-[82%]">
-          <p className="font-bold">Balance :</p>
+          <p className="font-bold text-2xl">Balance :</p>
           <p
-            className={`text-3xl pl-6 -m-2 ${
+            className={`flex items-center gap-2 text-3xl pl-6 -m-2 ${
               totalIncome - totalExpense >= 0
                 ? "text-green-700"
                 : "text-red-700"
             }`}
           >
-            ${totalIncome - totalExpense}
+            <RiMoneyRupeeCircleFill className="text-2xl" />
+            {totalIncome - totalExpense}
           </p>
         </div>
         <button
@@ -168,14 +170,17 @@ const Accounts = () => {
       <div className="w-[100%] justify-between inline-flex mb-10 ">
         <div className="w-[35%] pl-6 ml-8 text-balance border-2 rounded-b-md">
           <p className="font-bold mb-1.5"> Expense :</p>
-          <p className="text-3xl text-center text-red-600">
-            ${totalExpense.toFixed(2)}
+          <p className="text-3xl text-center flex items-center gap-2 text-red-600">
+            <RiMoneyRupeeCircleFill className="text-2xl" />
+            {totalExpense.toFixed(0)}
           </p>
         </div>
         <div className="w-[35%] pl-6 mr-8 text-balance border-2 rounded-b-md">
           <p className="font-bold mb-1.5">Income :</p>
-          <p className="text-3xl text-center text-green-600">
-            ${totalIncome.toFixed(2)}
+          <p className="text-3xl flex items-center gap-2 text-center text-green-600">
+            <RiMoneyRupeeCircleFill className="text-2xl" />
+
+            {totalIncome.toFixed(0)}
           </p>
         </div>
       </div>
