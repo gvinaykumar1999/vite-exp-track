@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { RiMoneyRupeeCircleFill } from "react-icons/ri";
+import { useCurrency } from "./CurrencyContext";
 
 const Accounts = () => {
   // Define state for multiple input fields
@@ -85,6 +86,10 @@ const Accounts = () => {
       data.moneySpend.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  //added
+
+  const { currency } = useCurrency();
+
   return (
     <div className=" mt-5 m-auto border-2 w-[50%]">
       <h2 className=" text-center pt-6 pb-6 text-3xl font-bold text-red-700 underline">
@@ -101,7 +106,8 @@ const Accounts = () => {
                 : "text-red-700"
             }`}
           >
-            <RiMoneyRupeeCircleFill className="text-2xl" />
+            {/* <RiMoneyRupeeCircleFill className="text-2xl" /> */}
+            {currency}
             {totalIncome - totalExpense}
           </p>
         </div>
@@ -171,15 +177,16 @@ const Accounts = () => {
         <div className="w-[35%] pl-6 ml-8 text-balance border-2 rounded-b-md">
           <p className="font-bold mb-1.5"> Expense :</p>
           <p className="text-3xl text-center flex items-center gap-2 text-red-600">
-            <RiMoneyRupeeCircleFill className="text-2xl" />
+            {/* <RiMoneyRupeeCircleFill className="text-2xl" /> */}
+            {currency}
             {totalExpense.toFixed(0)}
           </p>
         </div>
         <div className="w-[35%] pl-6 mr-8 text-balance border-2 rounded-b-md">
           <p className="font-bold mb-1.5">Income :</p>
           <p className="text-3xl flex items-center gap-2 text-center text-green-600">
-            <RiMoneyRupeeCircleFill className="text-2xl" />
-
+            {/* <RiMoneyRupeeCircleFill className="text-2xl" /> */}
+            {currency}
             {totalIncome.toFixed(0)}
           </p>
         </div>

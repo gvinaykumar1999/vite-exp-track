@@ -7,8 +7,9 @@ import { LuSquareMenu } from "react-icons/lu";
 import { LiaAddressBook } from "react-icons/lia";
 import { IoLogoUsd } from "react-icons/io";
 import { FaEuroSign } from "react-icons/fa";
-import { FaYenSign } from "react-icons/fa";
-import { RiMoneyRupeeCircleFill } from "react-icons/ri";
+import { PiCurrencyGbpBold } from "react-icons/pi";
+import { FaIndianRupeeSign } from "react-icons/fa6";
+import { useCurrency } from "./CurrencyContext"; // adjust path
 
 const LandingNav = () => {
   const navigate = useNavigate();
@@ -53,6 +54,8 @@ const LandingNav = () => {
   };
 
   const [isOpen, setIsOpen] = useState(false);
+  // added
+  const { handleCurrencyChange } = useCurrency();
 
   return (
     <div>
@@ -178,27 +181,40 @@ const LandingNav = () => {
                   {isOpen && (
                     <ul className="absolute left-0 mt-2 w-25 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-md ">
                       <li>
-                        <button className="flex items-center gap-1 pl-4 pr-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
-                          <RiMoneyRupeeCircleFill />
+                        {/* added */}
+                        <button
+                          className="flex items-center gap-1 pl-4 pr-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
+                          onClick={() => handleCurrencyChange("₹")}
+                        >
+                          <FaIndianRupeeSign />
                           RUPEE
                         </button>
                       </li>
                       <li>
-                        <button className="flex items-center gap-1 pl-4 pr-[30px] py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
+                        <button
+                          className="flex items-center gap-1 pl-4 pr-[30px] py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
+                          onClick={() => handleCurrencyChange("$")}
+                        >
                           <IoLogoUsd />
                           USD
                         </button>
                       </li>
                       <li>
-                        <button className="flex items-center gap-1 pl-4 pr-8 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
+                        <button
+                          onClick={() => handleCurrencyChange("€")}
+                          className="flex items-center gap-1 pl-4 pr-8 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
+                        >
                           <FaEuroSign />
                           EUR
                         </button>
                       </li>
 
                       <li>
-                        <button className="flex items-center gap-1 pl-4 pr-[30px] py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
-                          <FaYenSign />
+                        <button
+                          onClick={() => handleCurrencyChange("£")}
+                          className="flex items-center gap-1 pl-4 pr-[28px] py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
+                        >
+                          <PiCurrencyGbpBold className="text-lg" />
                           GBP
                         </button>
                       </li>
