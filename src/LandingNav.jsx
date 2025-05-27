@@ -176,27 +176,28 @@ const LandingNav = () => {
                   </button>
 
                   {isOpen && (
-                    <ul className="absolute left-0 mt-2 w-22 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-md ">
+                    <ul className="absolute left-0 mt-2 w-25 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-md ">
                       <li>
-                        <button className="flex items-center gap-1 px-[8px] py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
+                        <button className="flex items-center gap-1 pl-4 pr-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
                           <RiMoneyRupeeCircleFill />
                           RUPEE
                         </button>
                       </li>
                       <li>
-                        <button className="flex items-center gap-1 px-[15px] py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
+                        <button className="flex items-center gap-1 pl-4 pr-[30px] py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
                           <IoLogoUsd />
                           USD
                         </button>
                       </li>
                       <li>
-                        <button className="flex items-center gap-1 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
+                        <button className="flex items-center gap-1 pl-4 pr-8 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
                           <FaEuroSign />
                           EUR
                         </button>
                       </li>
+
                       <li>
-                        <button className="flex items-center gap-1 px-[15px] py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
+                        <button className="flex items-center gap-1 pl-4 pr-[30px] py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
                           <FaYenSign />
                           GBP
                         </button>
