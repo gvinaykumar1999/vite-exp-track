@@ -12,6 +12,7 @@ import LandingPage from "./LandingPage";
 import Profile from "./Profile";
 import { CurrencyProvider } from "./CurrencyContext"; // adjust path
 import IncomesPage from "./IncomesPage";
+import ExpensesPage from "./ExpensesPage";
 
 const App = () => {
   const [submittedData, setSubmittedData] = useState([]);
@@ -24,10 +25,6 @@ const App = () => {
             <Route path="/" element={<LandingPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route
-              path="/incomespage"
-              element={<IncomesPage submittedData={submittedData} />}
-            />
-            <Route
               path="/accounts"
               element={
                 <Accounts
@@ -35,6 +32,15 @@ const App = () => {
                   setSubmittedData={setSubmittedData}
                 />
               }
+            />
+            <Route
+              path="/incomespage"
+              element={<IncomesPage submittedData={submittedData} />}
+            />
+
+            <Route
+              path="/expensespage"
+              element={<ExpensesPage submittedData={submittedData} />}
             />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/profile" element={<Profile />} />

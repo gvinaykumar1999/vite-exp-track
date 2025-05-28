@@ -169,6 +169,31 @@ const LandingNav = () => {
           >
             {isLoggedIn ? (
               <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg bg-gray-300 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                  <Link
+                    to="/accounts"
+                    className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    A/c
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    to="/incomespage"
+                    className="block py-2 px-3 text-gray-900  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Incomes
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/expensespage"
+                    className="block py-2 px-3 text-gray-900  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Expense
+                  </Link>
+                </li>
                 <li className="relative">
                   <button
                     onClick={() => setIsOpen(!isOpen)}
@@ -220,30 +245,6 @@ const LandingNav = () => {
                       </li>
                     </ul>
                   )}
-                </li>
-                <li>
-                  <Link
-                    to="/incomespage"
-                    className="block py-2 px-3 text-gray-900  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                  >
-                    Incomes
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    //to="/expense"
-                    className="block py-2 px-3 text-gray-900  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                  >
-                    Expense
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/accounts"
-                    className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                  >
-                    A/c
-                  </Link>
                 </li>
               </ul>
             ) : (
