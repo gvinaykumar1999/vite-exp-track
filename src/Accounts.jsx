@@ -3,7 +3,7 @@ import { useState } from "react";
 import { RiMoneyRupeeCircleFill } from "react-icons/ri";
 import { useCurrency } from "./CurrencyContext";
 
-const Accounts = () => {
+const Accounts = ({ submittedData, setSubmittedData }) => {
   // Define state for multiple input fields
   const [formData, setFormData] = useState({
     activity: "",
@@ -11,7 +11,7 @@ const Accounts = () => {
     moneySpend: "",
   });
 
-  const [submittedData, setSubmittedData] = useState([]);
+  // const [submittedData, setSubmittedData] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   // State for the search term

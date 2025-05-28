@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Accounts from "./Accounts";
 import LoginForm from "./LoginForm";
@@ -11,8 +11,10 @@ import Services from "./Services";
 import LandingPage from "./LandingPage";
 import Profile from "./Profile";
 import { CurrencyProvider } from "./CurrencyContext"; // adjust path
+import IncomesPage from "./IncomesPage";
 
 const App = () => {
+  const [submittedData, setSubmittedData] = useState([]);
   return (
     <div>
       <CurrencyProvider>
@@ -21,7 +23,19 @@ const App = () => {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/signup" element={<SignupPage />} />
-            <Route path="/accounts" element={<Accounts />} />
+            <Route
+              path="/incomespage"
+              element={<IncomesPage submittedData={submittedData} />}
+            />
+            <Route
+              path="/accounts"
+              element={
+                <Accounts
+                  submittedData={submittedData}
+                  setSubmittedData={setSubmittedData}
+                />
+              }
+            />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/home" element={<Home />} />
