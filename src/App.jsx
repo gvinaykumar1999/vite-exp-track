@@ -13,6 +13,7 @@ import Profile from "./Profile";
 import { CurrencyProvider } from "./CurrencyContext"; // adjust path
 import IncomesPage from "./IncomesPage";
 import ExpensesPage from "./ExpensesPage";
+import Footer from "./Footer";
 
 const App = () => {
   const [submittedData, setSubmittedData] = useState([]);

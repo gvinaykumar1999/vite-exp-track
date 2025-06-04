@@ -1,8 +1,9 @@
 import React from "react";
+import Footer from "./Footer";
 
 const Services = () => {
   return (
-    <div>
+    <>
       <div className="bg-gray-400">
         <h1 className="text-3xl text-center p-5 text-black ">Services</h1>
         <div className="flex space-x-6 pl-10">
@@ -44,7 +45,8 @@ const Services = () => {
           ></img>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

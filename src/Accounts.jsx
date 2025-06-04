@@ -91,7 +91,7 @@ const Accounts = ({ submittedData, setSubmittedData }) => {
   const { currency } = useCurrency();
 
   return (
-    <div className=" mt-5 m-auto border-2 w-[50%]">
+    <div className=" mt-5 mb-5 m-auto border-2 w-[50%]">
       <h2 className=" text-center pt-6 pb-6 text-3xl font-bold text-red-700 underline">
         Expense Tracker
       </h2>
